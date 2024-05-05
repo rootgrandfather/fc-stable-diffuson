@@ -2,20 +2,19 @@ edition: 1.0.0 #  命令行YAML规范版本，遵循语义化版本（Semantic V
 name: fc-stable-diffusion
 access: default
 vars:
-  region: "{{ region }}" 
-  serviceName: "{{ serviceName }}"
-  functionName: "{{ functionName }}" 
-  imageUrl: "registry.{{region}}.aliyuncs.com/aliyun-fc/fc-stable-diffusion:{{ if type === '动漫风格' }}anime-v12{{ else if type === '真人风格'}}realman-v12{{else if type === '轻量版'}}lite-v4{{ else }}sd1.5-v12{{/if}}" 
-  filemgrToken: "{{ filemgrToken || '' }}"
-  extraArgs: "{{ extraArgs || '' }}{{ if webuiEnabled === false }} --nowebui{{/if}}{{ if webuiAuth !== '' && webuiAuth !== undefined }} --gradio-auth {{webuiAuth}}{{/if}}{{ if apiEnabled }} --api{{/if}}{{ if apiAuth !== '' && apiAuth !== undefined }} --api-auth {{apiAuth}}{{/if}}"
-  enableCollect: "{{ enableCollect || '' }}"
+  region: "cn-hangzhou" 
+  serviceName: "serverless-devs-application"
+  functionName: "stable-diffusion-webui" 
+  imageUrl: "registry.cn-hangzhou.aliyuncs.com/aliyun-fc/fc-stable-diffusion:anime-v12" 
+  filemgrToken: ""
+  extraArgs: "--api"
+  enableCollect: ""
   filemgrFilename: "filemgr-1.2.2"
   service:
-    name: ${vars.serviceName}
+    name: "serverless-devs-application"
     description: 'stable-diffusion 部署到函数计算'
     internetAccess: true
-    {{ if roleArn !== '' && roleArn !== undefined }}role: "{{roleArn}}"{{/if}}
-    {{ if nasEnabled === true }}nasConfig: auto{{/if}}
+    nasConfig: auto
 
 services:
   stable-diffusion:
@@ -70,7 +69,6 @@ services:
           routeConfigs:
             - path: /*
 
-  {{ if roleArn !== '' && roleArn !== undefined }} 
   filemgr:
     component: fc 
     actions: 
@@ -124,4 +122,3 @@ services:
           protocol: HTTP
           routeConfigs:
             - path: /*
-  {{/if}}
