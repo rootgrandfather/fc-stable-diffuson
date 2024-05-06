@@ -8,7 +8,7 @@ vars:
   # imageUrl: "registry.cn-hangzhou.aliyuncs.com/aliyun-fc/fc-stable-diffusion:anime-v12" 
   imageUrl: "registry.cn-hangzhou.aliyuncs.com/pdkpdk/pdkpdk:1"
   filemgrToken: ""
-  extraArgs: "--api"
+  extraArgs: "--api --xformers"
   enableCollect: ""
   filemgrFilename: "filemgr-1.2.2"
   service:
