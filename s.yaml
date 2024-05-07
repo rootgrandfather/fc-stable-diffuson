@@ -74,7 +74,7 @@ services:
     actions: 
       pre-deploy:
          - run: |
-            cd code && \
+            cd src/code && \
             curl http://serverless-tool-images.oss-cn-hangzhou.aliyuncs.com/aigc/filemgr/${vars.filemgrFilename}.zip -o filemgr.zip && \
             unzip filemgr.zip && \
             mv dist/ filemgr/
@@ -85,7 +85,7 @@ services:
       function:
         name: "admin"
         description: '模型管理辅助工具'
-        codeUri: './code/filemgr'
+        codeUri: './src/code/filemgr'
         runtime: custom
         timeout: 7200
         memorySize: 3072
